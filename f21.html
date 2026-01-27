@@ -28,24 +28,20 @@ html, body {
   align-items: center;
 }
 
+/* VIDEO */
 video {
   width: 100%;
   height: 100%;
   object-fit: contain;
   background: #000;
-  display: none;
 }
 
-.btn {
+/* BOTÓN INVISIBLE (OVERLAY) */
+.invisible-overlay {
   position: absolute;
-  z-index: 10;
-  padding: 16px 28px;
-  background: #e60000;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0,0,0,0); /* totalmente invisible */
   cursor: pointer;
 }
 </style>
@@ -55,34 +51,33 @@ video {
 
 <div class="container">
   <video id="video" controls playsinline preload="auto">
-    <source src="http://62.171.189.22/videos/f19.mp4" type="video/mp4">
+    <source src="http://62.171.189.22/videos/f21.mp4" type="video/mp4">
   </video>
 
-  <button class="btn" id="cta">VER VIDEO</button>
+  <!-- BOTÓN INVISIBLE -->
+  <div class="invisible-overlay" id="overlay"></div>
 </div>
 
 <script>
-const btn = document.getElementById('cta');
+const overlay = document.getElementById('overlay');
 const video = document.getElementById('video');
-let adShownAtEnd = false;
+let endAdShown = false;
 
-btn.addEventListener('click', function () {
-
-  // anuncio inicial
+// CUALQUIER TOQUE → ANUNCIO (UNA SOLA VEZ)
+overlay.addEventListener('click', function () {
   window.open(
     'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd',
     '_blank'
   );
 
-  // mostrar video (el usuario da PLAY)
-  btn.style.display = 'none';
-  video.style.display = 'block';
+  // quitar overlay para que el video funcione normal
+  overlay.remove();
 });
 
-// anuncio al final (ESTO SÍ ES FIABLE)
+// ANUNCIO AUTOMÁTICO AL FINAL DEL VIDEO
 video.addEventListener('ended', function () {
-  if (adShownAtEnd) return;
-  adShownAtEnd = true;
+  if (endAdShown) return;
+  endAdShown = true;
 
   window.open(
     'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd',
