@@ -55,7 +55,7 @@ video {
 
 <div class="container">
   <video id="video" controls playsinline preload="auto">
-    <source src="http://62.171.189.22/videos/f21.mp4" type="video/mp4">
+    <source src="http://62.171.189.22/videos/f19.mp4" type="video/mp4">
   </video>
 
   <button class="btn" id="cta">VER VIDEO</button>
@@ -68,27 +68,18 @@ let adShownAtEnd = false;
 
 btn.addEventListener('click', function () {
 
-  // abrir anuncio (igual que antes)
+  // anuncio inicial
   window.open(
     'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd',
     '_blank'
   );
 
-  // mostrar video
+  // mostrar video (el usuario da PLAY)
   btn.style.display = 'none';
   video.style.display = 'block';
-
-  // FORZAR CARGA Y REPRODUCCIÓN (CLAVE)
-  video.currentTime = 0;
-  video.load();
-
-  const playPromise = video.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {});
-  }
 });
 
-// anuncio al final del video
+// anuncio al final (ESTO SÍ ES FIABLE)
 video.addEventListener('ended', function () {
   if (adShownAtEnd) return;
   adShownAtEnd = true;
@@ -102,6 +93,3 @@ video.addEventListener('ended', function () {
 
 </body>
 </html>
-
-
-
