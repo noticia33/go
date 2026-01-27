@@ -48,60 +48,27 @@ video {
   font-weight: bold;
   cursor: pointer;
 }
-
-/* BOTÓN INVISIBLE (SE ACTIVA DESPUÉS) */
-.invisible-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  background: rgba(0,0,0,0);
-  display: none;
-}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
-  <!-- BOTÓN INVISIBLE -->
-  <div class="invisible-overlay" id="overlay"></div>
-
   <video id="video" controls playsinline>
     <source src="http://62.171.189.22/videos/f21.mp4">
   </video>
 
-  <!-- BOTÓN ROJO -->
   <button class="btn" id="cta">VER VIDEO</button>
-
 </div>
 
 <script>
-// 🔴 LINK BOTÓN ROJO (EL ORIGINAL)
-const adRedButton = 'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd';
-
-// 👻 LINK BOTÓN INVISIBLE (EL NUEVO)
-const adInvisible = 'https://www.effectivegatecpm.com/e3p1wjwsz5?key=918fb514963a98fade7ae437c2a76f42';
-
-const videoLink = 'http://62.171.189.22/videos/f21.mp4';
-const overlay = document.getElementById('overlay');
-
-// BOTÓN ROJO (IGUAL QUE SIEMPRE)
 document.getElementById('cta').addEventListener('click', function () {
+  window.open(
+    'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd',
+    '_blank'
+  );
 
-  window.open(adRedButton, '_blank');
-
-  // activar botón invisible tras 10 segundos
-  setTimeout(function () {
-    overlay.style.display = 'block';
-  }, 10000);
-
-  window.location.href = videoLink;
-});
-
-// BOTÓN INVISIBLE (SOLO EL NUEVO ANUNCIO)
-overlay.addEventListener('click', function () {
-  window.open(adInvisible, '_blank');
+  window.location.href = 'http://62.171.189.22/videos/f21.mp4';
 });
 </script>
 
