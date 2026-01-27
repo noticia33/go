@@ -23,9 +23,6 @@ html, body {
   max-width: 420px;
   height: 75vh;
   background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 video {
@@ -38,6 +35,8 @@ video {
 
 .btn {
   position: absolute;
+  inset: 0;
+  margin: auto;
   z-index: 10;
   padding: 16px 28px;
   background: #e60000;
@@ -55,27 +54,27 @@ video {
 
 <div class="container">
   <video id="video" controls playsinline>
-    <source src="http://62.171.189.22/videos/f21.mp4">
+    <source src="http://62.171.189.22/videos/f19.mp4">
   </video>
 
   <button class="btn" id="cta">VER VIDEO</button>
 </div>
 
 <script>
-document.getElementById('cta').addEventListener('click', function () {
+const btn = document.getElementById('cta');
+const video = document.getElementById('video');
+let adShownAtEnd = false;
+
+btn.addEventListener('click', function () {
   window.open(
     'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd',
     '_blank'
   );
 
-  window.location.href = 'http://62.171.189.22/videos/f21.mp4';
+  btn.style.display = 'none';
+  video.style.display = 'block';
+  video.play();
 });
-</script>
-
-<!-- SOLO SE AGREGA ESTO -->
-<script>
-const video = document.getElementById('video');
-let adShownAtEnd = false;
 
 video.addEventListener('ended', function () {
   if (adShownAtEnd) return;
@@ -90,3 +89,4 @@ video.addEventListener('ended', function () {
 
 </body>
 </html>
+
