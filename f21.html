@@ -23,6 +23,9 @@ html, body {
   max-width: 420px;
   height: 75vh;
   background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 video {
@@ -35,8 +38,6 @@ video {
 
 .btn {
   position: absolute;
-  inset: 0;
-  margin: auto;
   z-index: 10;
   padding: 16px 28px;
   background: #e60000;
@@ -66,22 +67,25 @@ const video = document.getElementById('video');
 let adShownAtEnd = false;
 
 btn.addEventListener('click', function () {
+  // anuncio inicial (igual que antes)
   window.open(
     'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd',
     '_blank'
   );
 
+  // MOSTRAR Y REPRODUCIR VIDEO (SIN CAMBIAR DISEÑO)
   btn.style.display = 'none';
   video.style.display = 'block';
   video.play();
 });
 
+// anuncio automático al final
 video.addEventListener('ended', function () {
   if (adShownAtEnd) return;
   adShownAtEnd = true;
 
   window.open(
-    'https://www.effectivegatecpm.com/e3p1wjwsz5?key=918fb514963a98fade7ae437c2a76f42',
+    'https://www.effectivegatecpm.com/bxxv9s23qi?key=250381829f8e68db4523d7b93130f1bd',
     '_blank'
   );
 });
@@ -89,4 +93,5 @@ video.addEventListener('ended', function () {
 
 </body>
 </html>
+
 
