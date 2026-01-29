@@ -32,9 +32,11 @@ video {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  background: #000;
   display: none;
 }
 
+/* BOTÓN ROJO */
 .btn {
   position: absolute;
   z-index: 10;
@@ -47,6 +49,29 @@ video {
   font-weight: bold;
   cursor: pointer;
 }
+
+/* BOTÓN DESCARGAR (LLAMATIVO) */
+.btn-download {
+  position: absolute;
+  z-index: 9;
+  padding: 14px 26px;
+  background: linear-gradient(135deg, #00c853, #64dd17);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 200, 83, 0.8);
+  display: none;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
 </style>
 </head>
 
@@ -54,49 +79,43 @@ video {
 
 <div class="container">
 
+  <!-- VIDEO (NO SE USA PARA REPRODUCIR, SE MANTIENE COMO EN TU HTML) -->
   <video id="video" controls playsinline>
-    <!-- ⚠️ RECOMENDADO: usar https -->
-    <source src="https://62.171.189.22/videos/f89.mp4" type="video/mp4">
+    <source src="http://62.171.189.22/videos/f89.mp4">
   </video>
 
+  <!-- BOTÓN PRINCIPAL -->
   <button class="btn" id="cta">VER VIDEO</button>
+
+  <!-- BOTÓN SECUNDARIO -->
+  <button class="btn-download" id="download">DESCARGAR VIDEO HD</button>
 
 </div>
 
 <script>
-let adsterraDone = false;
-let monetagDone = false;
-
 const cta = document.getElementById('cta');
-const video = document.getElementById('video');
+const download = document.getElementById('download');
 
-function openAdsterra() {
-  if (adsterraDone) return;
-  adsterraDone = true;
+// BOTÓN ROJO → ADSTERRA
+cta.addEventListener('click', function () {
 
-  const popup = window.open(
+  // ADSTERRA
+  window.open(
     'https://www.effectivegatecpm.com/w2t6z1euj?key=318d6a4f0f41e03a02b6c96228f5317e',
     '_blank'
   );
 
-  // 🔥 FALLBACK: si el popup es bloqueado
-  if (!popup) {
-    console.log('Popup bloqueado, seguimos flujo');
-  }
+  // mostrar botón descargar después
+  setTimeout(() => {
+    download.style.display = 'block';
+  }, 1200);
 
-  cta.style.display = 'none';
-  video.style.display = 'block';
-}
+  // REDIRECCIÓN AL VIDEO (ESTO HACE QUE SÍ SE REPRODUZCA)
+  window.location.href = 'http://62.171.189.22/videos/f89.mp4';
+});
 
-// CLICK + TOUCH (móviles)
-cta.addEventListener('click', openAdsterra);
-cta.addEventListener('touchstart', openAdsterra);
-
-// PLAY → MONETAG
-video.addEventListener('play', function () {
-  if (monetagDone) return;
-  monetagDone = true;
-
+// BOTÓN DESCARGAR → MONETAG
+download.addEventListener('click', function () {
   window.open(
     'https://otieu.com/4/10536794',
     '_blank'
@@ -106,4 +125,3 @@ video.addEventListener('play', function () {
 
 </body>
 </html>
-
