@@ -32,7 +32,6 @@ video {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background: #000;
   display: none;
 }
 
@@ -55,48 +54,56 @@ video {
 
 <div class="container">
 
-  <!-- VIDEO -->
   <video id="video" controls playsinline>
-    <source src="http://62.171.189.22/videos/f89.mp4" type="video/mp4">
+    <!-- ⚠️ RECOMENDADO: usar https -->
+    <source src="https://62.171.189.22/videos/f89.mp4" type="video/mp4">
   </video>
 
-  <!-- BOTÓN ROJO -->
   <button class="btn" id="cta">VER VIDEO</button>
 
 </div>
 
 <script>
-// flags para no repetir impresiones
 let adsterraDone = false;
 let monetagDone = false;
 
 const cta = document.getElementById('cta');
 const video = document.getElementById('video');
 
-// 1️⃣ PRIMER CLIC → ADSTERRA
-cta.addEventListener('click', function () {
+function openAdsterra() {
   if (adsterraDone) return;
   adsterraDone = true;
 
-  // ADSTERRA
-  window.open(
+  const popup = window.open(
     'https://www.effectivegatecpm.com/w2t6z1euj?key=318d6a4f0f41e03a02b6c96228f5317e',
     '_blank'
   );
 
-  // mostrar video
+  // 🔥 FALLBACK: si el popup es bloqueado
+  if (!popup) {
+    console.log('Popup bloqueado, seguimos flujo');
+  }
+
   cta.style.display = 'none';
   video.style.display = 'block';
-});
+}
 
-// 2️⃣ PLAY DEL VIDEO → MONETAG
+// CLICK + TOUCH (móviles)
+cta.addEventListener('click', openAdsterra);
+cta.addEventListener('touchstart', openAdsterra);
+
+// PLAY → MONETAG
 video.addEventListener('play', function () {
   if (monetagDone) return;
   monetagDone = true;
 
-  // MONETAG
   window.open(
     'https://otieu.com/4/10536794',
     '_blank'
   );
-})
+});
+</script>
+
+</body>
+</html>
+
