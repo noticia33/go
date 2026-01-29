@@ -23,90 +23,96 @@ html, body {
   max-width: 420px;
   height: 75vh;
   background: #000;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* PREVIEW DEL VIDEO */
-.preview {
+video {
   width: 100%;
   height: 100%;
-  background: url('https://via.placeholder.com/420x750?text=VIDEO') center/cover no-repeat;
-  filter: brightness(0.75);
+  object-fit: contain;
+  background: #000;
+  display: none;
 }
 
-/* BOTÓN PLAY FAKE */
-.play-btn {
+/* BOTÓN ROJO */
+.btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90px;
-  height: 90px;
-  background: rgba(0,0,0,0.6);
-  border-radius: 50%;
-  border: 4px solid #fff;
+  z-index: 10;
+  padding: 16px 28px;
+  background: #e60000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.play-btn::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  border-top: 18px solid transparent;
-  border-bottom: 18px solid transparent;
-  border-left: 28px solid #fff;
-}
-
-/* TEXTO */
-.label {
+/* BOTÓN DESCARGA */
+.download {
   position: absolute;
   bottom: 20px;
-  width: 100%;
-  text-align: center;
+  padding: 14px 26px;
+  background: #00c853;
   color: #fff;
+  border-radius: 30px;
   font-size: 16px;
   font-weight: bold;
-  opacity: 0.9;
+  text-decoration: none;
+  display: none;
+  box-shadow: 0 0 15px rgba(0,200,83,0.8);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="player">
+<div class="container">
 
-  <div class="preview"></div>
-  <div class="play-btn"></div>
-  <div class="label">TOCA PARA REPRODUCIR ▶</div>
+  <!-- VIDEO ARCHIVE.ORG -->
+  <video id="video" controls playsinline>
+    <source src="https://ia902804.us.archive.org/18/items/dd_20260129/dd.mp4" type="video/mp4">
+  </video>
+
+  <!-- BOTÓN ADSTERRA -->
+  <button class="btn" id="cta">VER VIDEO</button>
+
+  <!-- BOTÓN DESCARGA / MONETAG -->
+  <a href="https://otieu.com/4/10536794" target="_blank" class="download" id="download">
+    ⬇ DESCARGAR VIDEO
+  </a>
 
 </div>
 
 <script>
-document.getElementById('player').addEventListener('click', function () {
+const cta = document.getElementById('cta');
+const video = document.getElementById('video');
+const download = document.getElementById('download');
 
-  // 1️⃣ ADSTERRA (PRINCIPAL)
+// CLICK BOTÓN ROJO → ADSTERRA
+cta.addEventListener('click', function () {
   window.open(
     'https://www.effectivegatecpm.com/w2t6z1euj?key=318d6a4f0f41e03a02b6c96228f5317e',
     '_blank'
   );
 
-  // 2️⃣ MONETAG (SIMULA "AL DAR PLAY")
-  setTimeout(() => {
-    window.open(
-      'https://otieu.com/4/10536794',
-      '_blank'
-    );
-  }, 120);
+  cta.style.display = 'none';
+  video.style.display = 'block';
+  video.play();
+});
 
-  // 3️⃣ VIDEO REAL (SÍ SE REPRODUCE)
-  setTimeout(() => {
-    window.location.href = 'http://62.171.189.22/videos/f89.mp4';
-  }, 250);
-
+// CUANDO EMPIEZA EL VIDEO → MOSTRAR DESCARGA
+video.addEventListener('play', function () {
+  download.style.display = 'block';
 });
 </script>
 
