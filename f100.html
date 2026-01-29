@@ -23,89 +23,90 @@ html, body {
   max-width: 420px;
   height: 75vh;
   background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 }
 
-/* BOTÓN ROJO */
-.btn {
+/* PREVIEW DEL VIDEO */
+.preview {
+  width: 100%;
+  height: 100%;
+  background: url('https://via.placeholder.com/420x750?text=VIDEO') center/cover no-repeat;
+  filter: brightness(0.75);
+}
+
+/* BOTÓN PLAY FAKE */
+.play-btn {
   position: absolute;
-  z-index: 10;
-  padding: 16px 28px;
-  background: #e60000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 50%;
+  border: 4px solid #fff;
+  cursor: pointer;
+}
+
+.play-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-left: 28px solid #fff;
+}
+
+/* TEXTO */
+.label {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
   color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  cursor: pointer;
-}
-
-/* BOTÓN DESCARGAR */
-.btn-download {
-  position: absolute;
-  z-index: 9;
-  padding: 14px 26px;
-  background: linear-gradient(135deg, #00c853, #64dd17);
-  color: #000;
-  border: none;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 200, 83, 0.8);
-  display: none;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-  100% { transform: scale(1); }
+  opacity: 0.9;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <button class="btn" id="cta">VER VIDEO</button>
-  <button class="btn-download" id="download">DESCARGAR VIDEO HD</button>
+<div class="container" id="player">
+
+  <div class="preview"></div>
+  <div class="play-btn"></div>
+  <div class="label">TOCA PARA REPRODUCIR ▶</div>
+
 </div>
 
 <script>
-const cta = document.getElementById('cta');
-const download = document.getElementById('download');
+document.getElementById('player').addEventListener('click', function () {
 
-// SI EL USUARIO REGRESÓ → MOSTRAR DESCARGAR
-if (sessionStorage.getItem('fromVideo')) {
-  download.style.display = 'block';
-  sessionStorage.removeItem('fromVideo');
-}
-
-// BOTÓN ROJO → ADSTERRA
-cta.addEventListener('click', function () {
-
-  // marcar que irá al video
-  sessionStorage.setItem('fromVideo', '1');
-
-  // ADSTERRA
+  // 1️⃣ ADSTERRA (PRINCIPAL)
   window.open(
     'https://www.effectivegatecpm.com/w2t6z1euj?key=318d6a4f0f41e03a02b6c96228f5317e',
     '_blank'
   );
 
-  // REDIRECCIÓN
-  window.location.href = 'http://62.171.189.22/videos/f89.mp4';
-});
+  // 2️⃣ MONETAG (SIMULA "AL DAR PLAY")
+  setTimeout(() => {
+    window.open(
+      'https://otieu.com/4/10536794',
+      '_blank'
+    );
+  }, 120);
 
-// BOTÓN DESCARGAR → MONETAG
-download.addEventListener('click', function () {
-  window.open(
-    'https://otieu.com/4/10536794',
-    '_blank'
-  );
+  // 3️⃣ VIDEO REAL (SÍ SE REPRODUCE)
+  setTimeout(() => {
+    window.location.href = 'http://62.171.189.22/videos/f89.mp4';
+  }, 250);
+
 });
 </script>
 
