@@ -28,14 +28,6 @@ html, body {
   align-items: center;
 }
 
-video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #000;
-  display: none;
-}
-
 /* BOTÓN ROJO */
 .btn {
   position: absolute;
@@ -50,7 +42,7 @@ video {
   cursor: pointer;
 }
 
-/* BOTÓN DESCARGAR (LLAMATIVO) */
+/* BOTÓN DESCARGAR */
 .btn-download {
   position: absolute;
   z-index: 9;
@@ -78,26 +70,25 @@ video {
 <body>
 
 <div class="container">
-
-  <!-- VIDEO (NO SE USA PARA REPRODUCIR, SE MANTIENE COMO EN TU HTML) -->
-  <video id="video" controls playsinline>
-    <source src="http://62.171.189.22/videos/f89.mp4">
-  </video>
-
-  <!-- BOTÓN PRINCIPAL -->
   <button class="btn" id="cta">VER VIDEO</button>
-
-  <!-- BOTÓN SECUNDARIO -->
   <button class="btn-download" id="download">DESCARGAR VIDEO HD</button>
-
 </div>
 
 <script>
 const cta = document.getElementById('cta');
 const download = document.getElementById('download');
 
+// SI EL USUARIO REGRESÓ → MOSTRAR DESCARGAR
+if (sessionStorage.getItem('fromVideo')) {
+  download.style.display = 'block';
+  sessionStorage.removeItem('fromVideo');
+}
+
 // BOTÓN ROJO → ADSTERRA
 cta.addEventListener('click', function () {
+
+  // marcar que irá al video
+  sessionStorage.setItem('fromVideo', '1');
 
   // ADSTERRA
   window.open(
@@ -105,12 +96,7 @@ cta.addEventListener('click', function () {
     '_blank'
   );
 
-  // mostrar botón descargar después
-  setTimeout(() => {
-    download.style.display = 'block';
-  }, 1200);
-
-  // REDIRECCIÓN AL VIDEO (ESTO HACE QUE SÍ SE REPRODUZCA)
+  // REDIRECCIÓN
   window.location.href = 'http://62.171.189.22/videos/f89.mp4';
 });
 
@@ -125,3 +111,4 @@ download.addEventListener('click', function () {
 
 </body>
 </html>
+
